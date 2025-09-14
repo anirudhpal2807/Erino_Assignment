@@ -2,14 +2,10 @@
   "name": "lead-management-frontend",
   "version": "1.0.0",
   "private": true,
-  "homepage": ".",
+  "type": "module",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^14.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
     "react-router-dom": "^6.8.1",
     "ag-grid-react": "^31.0.3",
     "ag-grid-community": "^31.0.3",
@@ -18,48 +14,39 @@
     "react-query": "^3.39.3",
     "react-hot-toast": "^2.4.1",
     "lucide-react": "^0.294.0",
-    "clsx": "^2.0.0",
-    "tailwindcss": "^3.3.6",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.32"
+    "clsx": "^2.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "build:prod": "GENERATE_SOURCEMAP=false react-scripts build",
-    "build:optimized": "node scripts/build-optimized.js",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prebuild": "npm run clean",
-    "clean": "rimraf build",
-    "postinstall": "npm run clean"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "dev": "vite",
+    "build": "vite build",
+    "build:prod": "vite build --mode production",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "clean": "rimraf dist"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.0.8",
+    "vitest": "^1.0.4",
+    "@testing-library/jest-dom": "^6.1.5",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/user-event": "^14.5.1",
+    "jsdom": "^23.0.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "tailwindcss": "^3.3.6",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
     "rimraf": "^5.0.5"
   },
   "engines": {
     "node": ">=16.0.0",
     "npm": ">=8.0.0"
-  },
-  "proxy": "http://localhost:5000"
+  }
 }
