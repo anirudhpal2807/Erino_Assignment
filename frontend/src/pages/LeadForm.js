@@ -18,7 +18,6 @@ const LeadForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset: formReset,
     setValue,
   } = useForm({
     defaultValues: {
@@ -39,7 +38,7 @@ const LeadForm = () => {
   });
 
   // Fetch lead data for editing
-  const { data: leadDataQuery, isLoading: leadLoading, error: leadErrorQuery } = useQuery(
+  const { isLoading: leadLoading } = useQuery(
     ['lead', id],
     () => leadsAPI.getLead(id),
     {
