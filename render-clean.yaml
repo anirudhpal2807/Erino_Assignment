@@ -2,15 +2,11 @@ services:
   - type: web
     name: erino-frontend
     env: static
-    buildCommand: npm run build:frontend
+    buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/build
     envVars:
       - key: REACT_APP_API_URL
         value: https://erino-backend.onrender.com/api
-      - key: REACT_APP_ENV
-        value: production
-      - key: GENERATE_SOURCEMAP
-        value: false
 
   - type: web
     name: erino-backend
