@@ -1,9 +1,9 @@
 // Production Configuration
 export const config = {
-  API_BASE_URL: import.meta.env.VITE_API_URL || 'https://erino-backend.onrender.com/api',
-  ENVIRONMENT: import.meta.env.VITE_APP_ENV || 'production',
-  ENABLE_LOGGING: import.meta.env.VITE_APP_ENV === 'development',
-  VERSION: import.meta.env.VITE_APP_VERSION || '1.0.0',
+  API_BASE_URL: process.env.REACT_APP_API_URL || 'https://erino-backend.onrender.com/api',
+  ENVIRONMENT: process.env.REACT_APP_ENV || 'production',
+  ENABLE_LOGGING: process.env.REACT_APP_ENV === 'development',
+  VERSION: process.env.REACT_APP_VERSION || '1.0.0',
 };
 
 // API Configuration
