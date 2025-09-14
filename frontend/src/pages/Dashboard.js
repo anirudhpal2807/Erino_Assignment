@@ -9,8 +9,6 @@ import {
   Target,
   Plus,
   Eye,
-  Edit,
-  Trash2,
   BarChart3
 } from 'lucide-react';
 
@@ -123,20 +121,6 @@ const Dashboard = () => {
     return <span className={`badge ${config.color}`}>{config.label}</span>;
   };
 
-  const getSourceBadge = (source) => {
-    const sourceConfig = {
-      website: { color: 'badge-info', label: 'Website' },
-      facebook_ads: { color: 'badge-primary', label: 'Facebook Ads' },
-      google_ads: { color: 'badge-success', label: 'Google Ads' },
-      referral: { color: 'badge-warning', label: 'Referral' },
-      events: { color: 'badge-secondary', label: 'Events' },
-      other: { color: 'badge-secondary', label: 'Other' },
-    };
-    
-    const config = sourceConfig[source] || { color: 'badge-secondary', label: source };
-    return <span className={`badge ${config.color}`}>{config.label}</span>;
-  };
-
   if (statsLoading || leadsLoading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -165,7 +149,7 @@ const Dashboard = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-gray-600">Welcome back! Here's what's happening with your leads.</p>
+          <p className="text-gray-600">Welcome back! Here&apos;s what&apos;s happening with your leads.</p>
         </div>
         <Link
           to="/leads/new"

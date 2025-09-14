@@ -1,17 +1,13 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { Link } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
 import { leadsAPI } from '../services/api';
 import {
   Plus,
-  Search,
   Filter,
   Edit,
   Trash2,
-  Eye,
-  MoreVertical,
-  Download,
   RefreshCw
 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -20,7 +16,7 @@ import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 const Leads = () => {
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(20);
+  const [limit] = useState(20);
   const [filters, setFilters] = useState({});
   const [showFilters, setShowFilters] = useState(false);
   const queryClient = useQueryClient();

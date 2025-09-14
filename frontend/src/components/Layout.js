@@ -9,9 +9,8 @@ import {
   Menu,
   X,
   User,
-  BarChart3,
-  Settings
 } from 'lucide-react';
+import PropTypes from 'prop-types';
 
 const Layout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -181,6 +180,10 @@ const Layout = ({ children }) => {
       </div>
     </div>
   );
+};
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default Layout;

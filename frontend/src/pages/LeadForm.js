@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -18,7 +18,7 @@ const LeadForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    reset: formReset,
     setValue,
   } = useForm({
     defaultValues: {
@@ -39,7 +39,7 @@ const LeadForm = () => {
   });
 
   // Fetch lead data for editing
-  const { data: leadData, isLoading: leadLoading, error: leadError } = useQuery(
+  const { data: leadDataQuery, isLoading: leadLoading, error: leadErrorQuery } = useQuery(
     ['lead', id],
     () => leadsAPI.getLead(id),
     {
@@ -230,7 +230,7 @@ const LeadForm = () => {
                   {...register('phone', {
                     required: 'Phone number is required',
                     pattern: {
-                      value: /^[\+]?[1-9][\d]{0,15}$/,
+                      value: /^[+]?[1-9][\d]{0,15}$/,
                       message: 'Please enter a valid phone number',
                     },
                   })}
