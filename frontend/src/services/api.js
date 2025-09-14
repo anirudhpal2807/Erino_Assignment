@@ -1,23 +1,20 @@
 import axios from 'axios';
+import { API_CONFIG, FEATURES } from '../config/production';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001/api';
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+const api = axios.create(API_CONFIG);
 
 // Request interceptor
 api.interceptors.request.use(
   (config) => {
-    console.log('API Request:', config.method?.toUpperCase(), config.url, config.params);
+    if (FEATURES.ENABLE_DEBUG_MODE) {
+      console.log('API Request:', config.method?.toUpperCase(), config.url, config.params);
+    }
     return config;
   },
   (error) => {
-    console.error('API Request Error:', error);
+    if (FEATURES.ENABLE_DEBUG_MODE) {
+      console.error('API Request Error:', error);
+    }
     return Promise.reject(error);
   }
 );
@@ -25,18 +22,23 @@ api.interceptors.request.use(
 // Response interceptor
 api.interceptors.response.use(
   (response) => {
-    console.log('✅ API Response Success:', response.status, response.config.url);
-    console.log('📊 API Response Data:', response.data);
+    if (FEATURES.ENABLE_DEBUG_MODE) {
+      console.log('✅ API Response Success:', response.status, response.config.url);
+      console.log('📊 API Response Data:', response.data);
+    }
     return response;
   },
   (error) => {
-    console.error('❌ API Response Error:', error.message);
-    console.error('🔍 Error Details:', {
-      status: error.response?.status,
-      url: error.config?.url,
-      data: error.response?.data,
-      code: error.code
-    });
+    if (FEATURES.ENABLE_DEBUG_MODE) {
+      console.error('❌ API Response Error:', error.message);
+      console.error('🔍 Error Details:', {
+        status: error.response?.status,
+        url: error.config?.url,
+        data: error.response?.data,
+        code: error.code
+      });
+    }
+    
     if (error.response?.status === 401) {
       // Handle unauthorized access
       window.location.href = '/login';

@@ -56,18 +56,35 @@ REACT_APP_API_URL=https://your-backend-url.onrender.com/api
 
 ### Common Issues and Solutions
 
-1. **Build Command Error:**
+1. **"Publish directory ./dist does not exist" Error:**
+   - **Problem:** Render is looking for `./dist` but React builds to `./build`
+   - **Solution:** Set Publish Directory to `frontend/build` (not `./dist`)
+   - **Check:** Make sure the build command is `cd frontend && npm install && npm run build`
+
+2. **"Publish directory npm run build does not exist" Error:**
+   - **Problem:** Render is using the build command as publish directory
+   - **Solution:** Set Publish Directory to `frontend/build` (not the build command)
+   - **Check:** Make sure the build command is `cd frontend && npm install && npm run build`
+
+3. **"Could not find a required file. Name: index.html" Error:**
+   - **Problem:** Build command not running from correct directory
+   - **Solution:** Use `cd frontend && npm install && npm run build` as build command
+   - **Check:** Ensure `frontend/public/index.html` exists in your repo
+
+4. **Build Command Error:**
    - Make sure the build command includes `cd frontend &&`
    - Ensure all dependencies are installed
+   - Check that `frontend/package.json` has the build script
 
-2. **Environment Variables:**
+5. **Environment Variables:**
    - Double-check all environment variable names
    - Make sure MongoDB URI is correct
    - Ensure CORS is configured for production URLs
 
-3. **Static Site Configuration:**
+6. **Static Site Configuration:**
    - Set Publish Directory to `frontend/build`
    - Add rewrite rules for React Router
+   - Make sure the build actually creates the `build` folder
 
 ### Testing Deployment
 

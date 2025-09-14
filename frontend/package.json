@@ -2,6 +2,7 @@
   "name": "lead-management-frontend",
   "version": "1.0.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -25,8 +26,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:prod": "GENERATE_SOURCEMAP=false react-scripts build",
+    "build:optimized": "node scripts/build-optimized.js",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prebuild": "npm run clean",
+    "clean": "rimraf build",
+    "postinstall": "npm run clean"
   },
   "eslintConfig": {
     "extends": [
@@ -48,7 +54,12 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17"
+    "@types/react-dom": "^18.2.17",
+    "rimraf": "^5.0.5"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
   },
   "proxy": "http://localhost:5000"
 }
