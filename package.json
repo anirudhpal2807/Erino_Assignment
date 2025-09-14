@@ -8,6 +8,7 @@
     "server": "cd backend && npm run dev",
     "client": "cd frontend && npm start",
     "build": "cd frontend && npm install && npm run build",
+    "build:frontend": "cd frontend && npm install && npm run build",
     "start": "cd backend && npm start",
     "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
     "postinstall": "cd frontend && npm install && cd ../backend && npm install"
@@ -21,5 +22,9 @@
   "engines": {
     "node": ">=16.0.0",
     "npm": ">=8.0.0"
-  }
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ]
 }

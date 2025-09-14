@@ -56,32 +56,38 @@ REACT_APP_API_URL=https://your-backend-url.onrender.com/api
 
 ### Common Issues and Solutions
 
-1. **"Publish directory ./dist does not exist" Error:**
+1. **"Publish directory build does not exist" Error:**
+   - **Problem:** Render is looking for `build` directory in root, but it's in `frontend/build`
+   - **Solution:** Set Publish Directory to `frontend/build` (not `build`)
+   - **Check:** Make sure the build command is `cd frontend && npm install && npm run build`
+
+2. **"Publish directory ./dist does not exist" Error:**
    - **Problem:** Render is looking for `./dist` but React builds to `./build`
    - **Solution:** Set Publish Directory to `frontend/build` (not `./dist`)
    - **Check:** Make sure the build command is `cd frontend && npm install && npm run build`
 
-2. **"Publish directory npm run build does not exist" Error:**
+3. **"Publish directory npm run build does not exist" Error:**
    - **Problem:** Render is using the build command as publish directory
    - **Solution:** Set Publish Directory to `frontend/build` (not the build command)
    - **Check:** Make sure the build command is `cd frontend && npm install && npm run build`
 
-3. **"Could not find a required file. Name: index.html" Error:**
-   - **Problem:** Build command not running from correct directory
-   - **Solution:** Use `cd frontend && npm install && npm run build` as build command
+4. **"Could not find a required file. Name: index.html" Error:**
+   - **Problem:** Render is looking in wrong path (`/src/frontend/public` instead of `/frontend/public`)
+   - **Solution:** Use correct `staticPublishPath: frontend/build` (not `./frontend/build`)
    - **Check:** Ensure `frontend/public/index.html` exists in your repo
+   - **Alternative:** Try `buildCommand: npm run build:frontend` instead
 
-4. **Build Command Error:**
+5. **Build Command Error:**
    - Make sure the build command includes `cd frontend &&`
    - Ensure all dependencies are installed
    - Check that `frontend/package.json` has the build script
 
-5. **Environment Variables:**
+6. **Environment Variables:**
    - Double-check all environment variable names
    - Make sure MongoDB URI is correct
    - Ensure CORS is configured for production URLs
 
-6. **Static Site Configuration:**
+7. **Static Site Configuration:**
    - Set Publish Directory to `frontend/build`
    - Add rewrite rules for React Router
    - Make sure the build actually creates the `build` folder
