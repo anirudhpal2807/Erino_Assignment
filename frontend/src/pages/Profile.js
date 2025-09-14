@@ -21,12 +21,14 @@ const Profile = () => {
     },
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (formData) => {
     try {
-      // Here you would typically call an API to update the user profile
+      // API call to update user profile would go here
+      console.log('Profile update data:', formData);
       toast.success('Profile updated successfully');
       setIsEditing(false);
     } catch (error) {
+      console.error('Profile update error:', error);
       toast.error('Failed to update profile');
     }
   };
@@ -279,4 +281,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+ export default Profile;
