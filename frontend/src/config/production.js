@@ -1,6 +1,6 @@
 // Production Configuration
 export const config = {
-  API_BASE_URL: process.env.REACT_APP_API_URL || 'https://erino-assignment-backend.onrender.com',
+  API_BASE_URL: process.env.REACT_APP_API_URL || 'https://erino-assignment-backend.onrender.com/api',
   ENVIRONMENT: process.env.REACT_APP_ENV || 'production',
   ENABLE_LOGGING: process.env.REACT_APP_ENV === 'development',
   VERSION: process.env.REACT_APP_VERSION || '1.0.0',

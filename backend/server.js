@@ -10,23 +10,22 @@ require('dotenv').config();
 
 const app = express();
 
-// CORS configuration - MUST be before other middleware
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'X-Requested-With'],
-  optionsSuccessStatus: 200
-}));
+// CORS configuration
+const allowedOrigins = [
+  'http://localhost:3000', // Local frontend
+  process.env.FRONTEND_URL, // Deployed frontend
+].filter(Boolean); // Removes any undefined/null values
 
-// Handle preflight requests
-app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', process.env.FRONTEND_URL || 'http://localhost:3000');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Cookie, X-Requested-With');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.sendStatus(200);
-});
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 
 // Security middleware
 app.use(helmet({
@@ -57,10 +56,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://palanirudh82992_db_user:NcMxUb57yv3jKpI3@erinodb.byfb0t1.mongodb.net/?retryWrites=true&w=majority&appName=ERINODB', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://palanirudh82992_db_user:NcMxUb57yv3jKpI3@erinodb.byfb0t1.mongodb.net/?retryWrites=true&w=majority&appName=ERINODB')
 .then(() => console.log('✅ MongoDB connected successfully'))
 .catch(err => {
   console.error('❌ MongoDB connection error:', err);
@@ -134,9 +130,7 @@ app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🌐 Health check: http://localhost:${PORT}/api/health`);
-  console.log(` MongoDB connected to: ${process.env.MONGODB_URI}`);
-
-  
+  console.log(`🔗 MongoDB connected to: ${process.env.MONGODB_URI}`);
 });
 
 module.exports = app;

@@ -98,7 +98,6 @@ const leadSchema = new mongoose.Schema({
 });
 
 // Indexes for better query performance
-leadSchema.index({ email: 1 });
 leadSchema.index({ status: 1 });
 leadSchema.index({ source: 1 });
 leadSchema.index({ createdBy: 1 });
