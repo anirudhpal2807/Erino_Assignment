@@ -12,6 +12,7 @@ import Profile from './pages/Profile';
 
 function AppRoutes() {
   const { user, loading } = useAuth();
+  const location = useLocation();
 
   if (loading) {
     return (
@@ -20,8 +21,6 @@ function AppRoutes() {
       </div>
     );
   }
-
-  const location = useLocation();
 
   return (
     <Routes>
