@@ -39,10 +39,9 @@ api.interceptors.response.use(
       });
     }
     
-    if (error.response?.status === 401) {
-      // Handle unauthorized access
-      window.location.href = '/login';
-    }
+    // For 401, let the caller/auth context decide how to handle navigation.
+    // Avoid hard reloads that cause flicker loops on the login page.
+    // if (error.response?.status === 401) { /* handle in AuthContext */ }
     return Promise.reject(error);
   }
 );

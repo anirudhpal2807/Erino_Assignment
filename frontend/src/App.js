@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
@@ -21,6 +21,8 @@ function AppRoutes() {
     );
   }
 
+  const location = useLocation();
+
   return (
     <Routes>
       <Route
@@ -33,7 +35,7 @@ function AppRoutes() {
       />
       <Route
         path="/"
-        element={user ? <Navigate to="/dashboard" replace /> : <Navigate to="/login" replace />}
+        element={user ? <Navigate to="/dashboard" replace /> : <Navigate to="/login" replace state={{ from: location }} />}
       />
       <Route
         path="/dashboard"
