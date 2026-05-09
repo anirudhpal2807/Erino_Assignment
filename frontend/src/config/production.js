@@ -1,17 +1,15 @@
-// src/config/production.js
-
 // Production Configuration
 export const config = {
   API_BASE_URL:
-    import.meta.env.MODE === 'development'
+    process.env.NODE_ENV === 'development'
       ? '/api'
-      : import.meta.env.VITE_API_URL,
+      : process.env.REACT_APP_API_URL,
 
-  ENVIRONMENT: import.meta.env.MODE || 'production',
+  ENVIRONMENT: process.env.NODE_ENV || 'production',
 
-  ENABLE_LOGGING: import.meta.env.MODE === 'development',
+  ENABLE_LOGGING: process.env.NODE_ENV === 'development',
 
-  VERSION: import.meta.env.VITE_APP_VERSION || '1.0.0',
+  VERSION: process.env.REACT_APP_VERSION || '1.0.0',
 };
 
 // API Configuration
@@ -31,6 +29,6 @@ export const FEATURES = {
   ENABLE_PERFORMANCE_MONITORING: config.ENVIRONMENT === 'production',
 };
 
-// Debug Logs
-console.log('🌍 Environment:', config.ENVIRONMENT);
-console.log('🔗 API Base URL:', config.API_BASE_URL);
+// Debug
+console.log('🌍 ENV:', config.ENVIRONMENT);
+console.log('🔗 API URL:', config.API_BASE_URL);
