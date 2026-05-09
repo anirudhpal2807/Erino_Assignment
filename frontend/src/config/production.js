@@ -1,12 +1,17 @@
+// src/config/production.js
+
 // Production Configuration
 export const config = {
   API_BASE_URL:
-    process.env.REACT_APP_ENV === 'development'
+    import.meta.env.MODE === 'development'
       ? '/api'
-      : (process.env.REACT_APP_API_URL || 'https://erino-assignment-backend.onrender.com/api'),
-  ENVIRONMENT: process.env.REACT_APP_ENV || process.env.NODE_ENV || 'production',
-  ENABLE_LOGGING: (process.env.REACT_APP_ENV || process.env.NODE_ENV) === 'development',
-  VERSION: process.env.REACT_APP_VERSION || '1.0.0',
+      : import.meta.env.VITE_API_URL,
+
+  ENVIRONMENT: import.meta.env.MODE || 'production',
+
+  ENABLE_LOGGING: import.meta.env.MODE === 'development',
+
+  VERSION: import.meta.env.VITE_APP_VERSION || '1.0.0',
 };
 
 // API Configuration
@@ -25,3 +30,7 @@ export const FEATURES = {
   ENABLE_DEBUG_MODE: config.ENVIRONMENT === 'development',
   ENABLE_PERFORMANCE_MONITORING: config.ENVIRONMENT === 'production',
 };
+
+// Debug Logs
+console.log('🌍 Environment:', config.ENVIRONMENT);
+console.log('🔗 API Base URL:', config.API_BASE_URL);
